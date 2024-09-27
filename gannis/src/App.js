@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'; 
 import DarkModeToggle from './components/DarkModeToggle';
+import Card from './components/Card/Card';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -40,31 +41,11 @@ function App() {
 
       <div className="container my-4">
         <h1 className="text-center">Bienvenidos a Gannis</h1>
-        <div className="row">
-          <div className="col-md-6">
-            <h2>Perros</h2>
-            <div className="d-flex flex-wrap">
-              <div className="card m-2" style={{ width: '18rem' }}>
-                <img src="url_de_imagen_perro" className="card-img-top" alt="Perro" />
-                <div className="card-body">
-                  <h5 className="card-title">Nombre del Perro</h5>
-                  <p className="card-text">Descripción del perro.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6">
-            <h2>Gatos</h2>
-            <div className="d-flex flex-wrap">
-              <div className="card m-2" style={{ width: '18rem' }}>
-                <img src="url_de_imagen_gato" className="card-img-top" alt="Gato" />
-                <div className="card-body">
-                  <h5 className="card-title">Nombre del Gato</h5>
-                  <p className="card-text">Descripción del gato.</p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className='container-mascotas'>
+        <Card></Card>
+        <Card></Card>
+        <Card></Card>
+        <Card></Card>
         </div>
       </div>
 
