@@ -1,3 +1,13 @@
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  margin-top: 20px;
+}
+
 .container-mascotas{
     display: flex;
     padding: 10%;

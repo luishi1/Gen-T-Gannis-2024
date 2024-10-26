@@ -1,16 +1,16 @@
 import React from 'react';
-import styles from "./Card.css"
+import './Card.css'; 
 
-function Card() {
+function Card({ title, text, imageUrl }) {
     return (
         <div className="card m-2" style={{ width: '18rem' }}>
-            <img src="url_de_imagen_gato" className="card-img-top" alt="Gato" />
+            <img src={imageUrl} className="card-img-top" alt={title} />
             <div className="card-body">
-                <h5 className="card-title">Silvestre</h5>
-                <p className="card-text">Macho / 3 meses</p>
+                <h5 className="card-title">{title}</h5>
+                <p className="card-text">{text}</p>
             </div>
         </div>
     );
-};
+}
 
 export default Card;
