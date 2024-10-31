@@ -79,7 +79,7 @@ const Mascotas = () => {
                             age={m.edad} 
                             size={m.tamano} 
                             weight={m.peso} 
-                            imageUrl="url_de_imagen_gato_1" 
+                            imageUrl={m.img} 
                         />
                     </div>
                 ))}

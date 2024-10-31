@@ -17,35 +17,35 @@ const AltaMascotas = () => {
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
-        
+
         setFormData((prevData) => ({
             ...prevData,
             [name]: type === 'file' ? files[0] : value
         }));
     };
-    
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         const formDataObj = new FormData();
         formDataObj.append('nombre', formData.nombre);
         formDataObj.append('edad', formData.edad);
         formDataObj.append('tamano', formData.tamano);
         formDataObj.append('peso', formData.peso);
-        formDataObj.append('img', formData.img); 
-    
+        formDataObj.append('img', formData.img);
+
         try {
             const response = await fetch('http://localhost:8081/api/mascotas', {
                 method: 'POST',
                 body: formDataObj,
             });
-    
+
             if (response.ok) {
                 const result = await response.json();
                 alert(result.message);
                 setFormData({ nombre: '', edad: '', tamano: '', peso: '', img: null });
-                navigate('/'); 
+                navigate('/');
             }
         } catch (error) {
             console.error('Error en la solicitud:', error);
@@ -73,6 +73,7 @@ const AltaMascotas = () => {
                                 value={formData.nombre}
                                 className="form-control"
                                 required
+                                accept="image/png, image/jpeg, image/jpg, image/gif"
                                 onChange={handleChange}
                             />
                         </div>
@@ -136,7 +137,7 @@ const AltaMascotas = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        
+
                     </div>
 
                 </div>
