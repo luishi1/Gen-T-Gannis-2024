@@ -34,6 +34,11 @@ const Navbar = ({ darkMode, toggleDarkMode, view }) => {
                                 <i className="fa-solid fa-circle-info"></i> Mascotas
                             </Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className={`nav-link ${location.pathname === '/forms' ? 'nav-link-active' : ''}`} to="/dashboard-admin">
+                                <i className="fa-solid fa-circle-info"></i> DashboardAdmin
+                            </Link>
+                        </li>
                     </ul>
                 </div>
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNav">

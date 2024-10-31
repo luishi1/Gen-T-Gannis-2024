@@ -1,3 +1,4 @@
+// src/index.js
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/uploads', express.static('uploads'));
 
+// Configuración de almacenamiento para multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');
@@ -23,6 +25,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+// Conexión a la base de datos MySQL
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -30,38 +33,43 @@ const db = mysql.createConnection({
     database: "gannis"
 });
 
+db.connect((err) => {
+    if (err) {
+        console.error('Error conectando a la base de datos:', err);
+        return;
+    }
+    console.log('Conectado a la base de datos MySQL');
+});
+
+// Endpoint de prueba
 app.get('/', (req, res) => {
-    return res.json("backkkk");
+    return res.json("Servidor funcionando");
 });
 
-app.listen(8081, () => {
-    console.log("Escuchando en el puerto 8081");
-});
-
+// Obtener mascotas
 app.get('/api/mascotas', (req, res) => {
     const sql = "SELECT * FROM mascotas";
     db.query(sql, (err, data) => {
-        if (err) return res.json(err);
-
-        const mascotasConImagenes = data.map(mascota => {
-            return {
-                ...mascota,
-                img: mascota.id ? `http://localhost:8081/uploads/${mascota.image}` : null
-            };
-        });
-
+        if (err) {
+            console.error('Error en la consulta a la base de datos:', err);
+            return res.status(500).json({ error: 'Error en la consulta a la base de datos' });
+        }
+        const mascotasConImagenes = data.map(mascota => ({
+            ...mascota,
+            img: mascota.image ? `http://localhost:8081/uploads/${mascota.image}` : null
+        }));
         return res.json(mascotasConImagenes);
     });
 });
 
+// Agregar una nueva mascota
 app.post('/api/mascotas', upload.single('img'), (req, res) => {
     const { nombre, edad, tamano, peso } = req.body;
-
     const sqlInsert = "INSERT INTO mascotas (nombre, edad, tamano, peso) VALUES (?, ?, ?, ?)";
     const values = [nombre, edad, tamano, peso];
 
     db.query(sqlInsert, values, (err, result) => {
-        if (err) return res.status(500).json({ error: err });
+        if (err) return res.status(500).json({ error: 'Error al insertar la mascota' });
 
         const mascotaId = result.insertId;
 
@@ -71,56 +79,49 @@ app.post('/api/mascotas', upload.single('img'), (req, res) => {
             const oldPath = path.join(__dirname, req.file.path);
             const newPath = path.join(__dirname, 'uploads', nuevoNombre);
 
-            if (!req.file || !req.file.path) {
-                console.log("Archivo no encontrao o no se subio correctamente");
-                return res.status(400).json({ error: "Archivo no encontrao" });
-            }
+            fs.rename(oldPath, newPath, (err) => {
+                if (err) return res.status(500).json({ error: 'Error al mover la imagen' });
 
-            fs.copyFile(oldPath, newPath, (err) => {
-                if (err) {
-                    console.error("Error copiando archivo:", err);
-                    return res.status(500).json({ error: 'Error copiando la imagen' });
-                }
-                console.log("Archivo copiado exitosamente a", newPath);
-            
-                fs.unlink(oldPath, (err) => {
-                    if (err) {
-                        console.error("Error eliminando archivo original:", err);
-                        return res.status(500).json({ error: 'Error eliminando archivo temporal' });
-                    }
-                    console.log("Archivo temporal eliminado:", oldPath);
-            
-                    const sqlUpdate = "UPDATE mascotas SET image = ? WHERE id = ?";
-                    db.query(sqlUpdate, [nuevoNombre, mascotaId], (err) => {
-                        if (err) {
-                            console.error("Error en el UPDATE:", err);
-                            return res.status(500).json({ error: 'Error al actualizar la base de datos' });
-                        }
-            
-                        console.log("Actualizacion en la base de datos exitosa yujuuu");
-                        return res.status(201).json({ message: 'Mascota añadida con exito', id: mascotaId, img: nuevoNombre });
-                    });
+                const sqlUpdate = "UPDATE mascotas SET image = ? WHERE id = ?";
+                db.query(sqlUpdate, [nuevoNombre, mascotaId], (err) => {
+                    if (err) return res.status(500).json({ error: 'Error al actualizar la base de datos con la imagen' });
+                    return res.status(201).json({ message: 'Mascota añadida con éxito', id: mascotaId, img: nuevoNombre });
                 });
             });
         } else {
-            res.status(201).json({ message: 'Mascota añadida con exito sin imagen', id: mascotaId });
+            res.status(201).json({ message: 'Mascota añadida con éxito sin imagen', id: mascotaId });
         }
     });
 });
 
+// Eliminar una mascota
+app.delete('/api/mascotas/:id', (req, res) => {
+    const id = req.params.id;
+    console.log("ID recibido para eliminar:", id); // Depuración
 
-app.post('/api/login', (req, res) => {
-    const { email, password } = req.body;
-
-    const sql = 'SELECT * FROM users WHERE email = ? AND password = ?';
-    db.query(sql, [email, password], (err, results) => {
+    const sqlSelect = "SELECT * FROM mascotas WHERE id = ?";
+    db.query(sqlSelect, [id], (err, results) => {
         if (err) {
-            return res.status(500).json({ message: 'Database error' });
+            console.error('Error en la consulta a la base de datos:', err);
+            return res.status(500).json({ error: 'Error en la consulta a la base de datos' });
         }
-        if (results.length > 0) {
-            return res.status(200).json({ message: 'SUCCESS' });
-        } else {
-            return res.status(401).json({ message: 'Invalid credentials' });
+        if (results.length === 0) {
+            console.log("Mascota no encontrada con ID:", id); // Depuración
+            return res.status(404).json({ message: 'Mascota no encontrada' });
         }
+
+        const sqlDelete = "DELETE FROM mascotas WHERE id = ?";
+        db.query(sqlDelete, [id], (err) => {
+            if (err) {
+                console.error('Error al eliminar la mascota:', err);
+                return res.status(500).json({ error: 'Error al eliminar la mascota' });
+            }
+            return res.status(204).send(); // Éxito, sin contenido
+        });
     });
+});
+
+// Iniciar el servidor
+app.listen(8081, () => {
+    console.log("Escuchando en el puerto 8081");
 });

@@ -7,6 +7,8 @@ import About from '../views/About';
 import Register from '../views/Register';
 import Forms from '../views/AltaMascotas';
 import Mascotas from '../views/Mascotas';
+import DashboardAdmin from '../views/DashboardAdmin'; // Asegúrate de que la ruta sea correcta
+import EditarMascota from '../views/EditarMascota'; // Asegúrate de que la ruta sea correcta
 
 const MainContent = () => {
     return (
@@ -18,6 +20,8 @@ const MainContent = () => {
                 <Route path="/register" element={<Register />} />
                 <Route path="/forms" element={<Forms />} />
                 <Route path="/mascotas" element={<Mascotas />} />
+                <Route path="/dashboard-admin" element={<DashboardAdmin />} />
+                <Route path="/editar-mascota/:id" element={<EditarMascota />} />
             </Routes>
         </main>
     );
