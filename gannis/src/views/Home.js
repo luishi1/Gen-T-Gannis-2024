@@ -1,7 +1,7 @@
 // src/views/Home.js
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card/Card';
-import './Home.css'
+import '../ui/Home.css'
 
 const Home = () => {
 

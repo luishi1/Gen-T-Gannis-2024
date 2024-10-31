@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
-import './AltaMascotas.css'; 
+import '../ui/AltaMascotas.css'; 
 
 const AltaMascotas = () => {
     const [formData, setFormData] = useState({
