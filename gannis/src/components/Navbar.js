@@ -2,15 +2,17 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import DarkModeToggle from './DarkModeToggle';
 import './Navbar.css';
+import Breadcrumbs from './BreadCrumbs';
 
 const Navbar = ({ darkMode, toggleDarkMode, view }) => {
     const location = useLocation(); // Obtén la ubicación actual
+    console.log("location: " + location.pathname);
 
     // Determina si el dropdown debe tener una clase especial
     const isActiveDropdown = (view === 'Pets' || view === 'Cats' || view === 'Dogs');
 
     return (
-        <nav className={`navbar navbar-expand-lg ${darkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'}`}>
+        <><nav className={`navbar navbar-expand-lg ${darkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'}`}>
             <div className="container-fluid">
                 <Link className="navbar-brand" to="http://mrwgifs.com/wp-content/uploads/2014/02/Ditto-Dance-Rave-All-Over-The-Place-In-Pokemon-Gif.gif" target="_blank">
                     <img src="logo.png" alt="" width="230" height="50" className="d-inline-block align-text-top" />
@@ -41,6 +43,11 @@ const Navbar = ({ darkMode, toggleDarkMode, view }) => {
                 </div>
             </div>
         </nav>
+        <div>
+            {location.pathname != "/" && <Breadcrumbs></Breadcrumbs>}
+        </div></>
+        
+        
     );
 };
 

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
 import '../ui/Forms.css';
+import Breadcrumbs from '../components/BreadCrumbs';
 
 const Login = () => {
     const navigate = useNavigate();
