@@ -1,21 +1,20 @@
 import React from 'react';
 import './Card.css'; 
 
-const Card = ({ id, nombre, sexo, edad }) => {
-
+const Card = ({ title, text, imageUrl }) => {
   return (
-    <a href={`/mascotadetalle?id=${id}`}>
+    <a href="/mascotadetalle">
       <div className="card card-min">
         <img 
           className="card_image" 
           height="220px" 
-          src="errorImg.png"
-          alt={nombre} 
+          src={imageUrl} 
+          onError={(e) => { e.target.src = "img/errorImg.png"; }} // Fallback para la imagen
+          alt={title} 
         />
-        <p className="card_name">{nombre}</p>
+        <p className="card_name">{title}</p>
         <div className="grid-container">
-          <div className="about about1">{sexo}</div>
-          <div className="about">{edad}</div>
+          <div className="about">{text}</div>
         </div>
       </div>
     </a>
