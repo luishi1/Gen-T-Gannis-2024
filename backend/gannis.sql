@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2024 a las 06:01:15
+-- Tiempo de generación: 31-10-2024 a las 10:48:48
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,21 +44,27 @@ CREATE TABLE `mascotas` (
   `id` int(8) NOT NULL,
   `nombre` varchar(25) NOT NULL,
   `edad` int(50) NOT NULL,
-  `vacunado` enum('Sí','No') NOT NULL,
-  `sexo` enum('Macho','Hembra') NOT NULL,
-  `animal` enum('Gato','Perro') NOT NULL,
   `tamano` varchar(20) NOT NULL,
-  `esterlizado` enum('Sí','No') NOT NULL,
   `peso` float NOT NULL,
-  `desparasitado` enum('Sí','No') NOT NULL,
   `nivel_de_actividad` varchar(250) NOT NULL,
-  `necesidades` varchar(450) NOT NULL,
-  `requisitos` varchar(450) NOT NULL,
-  `historia` varchar(450) NOT NULL,
-  `especificaciones` varchar(450) NOT NULL,
-  `fecha_alta` datetime DEFAULT NULL,
-  `fecha_baja` datetime DEFAULT NULL
+  `especificaciones` varchar(450) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `mascotas`
+--
+
+INSERT INTO `mascotas` (`id`, `nombre`, `edad`, `tamano`, `peso`, `nivel_de_actividad`, `especificaciones`) VALUES
+(1, 'Max', 3, 'Grande', 25.5, 'Alta', 'Ninguna'),
+(2, 'Luna', 2, 'Mediano', 8.2, 'Media', 'Requiere cepillado'),
+(3, 'Rocky', 1, 'Pequeño', 5, 'Baja', 'Requiere correa especial'),
+(4, 'Nina', 4, 'Grande', 20.3, 'Alta', 'Evitar zonas frías'),
+(5, 'Milo', 5, 'Pequeño', 7, 'Media', 'Requiere supervisión continua'),
+(6, 'Bella', 3, 'Mediano', 15.4, 'Baja', 'Evitar escaleras'),
+(7, 'Coco', 2, 'Grande', 30, 'Alta', 'Requiere espacio amplio'),
+(8, 'Simba', 6, 'Mediano', 9, 'Baja', 'Requiere comida especial'),
+(9, 'Maya', 1, 'Pequeño', 4.5, 'Media', 'Requiere control médico'),
+(10, 'Toby', 3, 'Grande', 18.7, 'Alta', 'Necesita estímulo físico');
 
 --
 -- Índices para tablas volcadas
@@ -90,7 +96,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

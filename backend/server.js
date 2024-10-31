@@ -1,9 +1,11 @@
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const app = express();
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -25,5 +27,17 @@ app.get('/api/mascotas', (req, res) => {
     db.query(sql, (err, data) => {
         if (err) return res.json(err);
         return res.json(data);
+    });
+});
+
+app.post('/api/mascotas', (req, res) => {
+    const { nombre, edad, tamano, peso, nivel_de_actividad, especificaciones } = req.body;
+    
+    const sql = "INSERT INTO mascotas (nombre, edad, tamano, peso, nivel_de_actividad, especificaciones) VALUES (?, ?, ?, ?, ?, ?)";
+    const values = [nombre, edad, tamano, peso, nivel_de_actividad, especificaciones];
+    
+    db.query(sql, values, (err, result) => {
+        if (err) return res.status(500).json({ error: err });
+        res.status(201).json({ message: 'Mascota añadida con éxito', result });
     });
 });
