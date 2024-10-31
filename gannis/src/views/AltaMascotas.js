@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 import '../ui/AltaMascotas.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const AltaMascotas = () => {
     const [formData, setFormData] = useState({
@@ -9,9 +11,9 @@ const AltaMascotas = () => {
         edad: '',
         tamano: '',
         peso: '',
-        nivel_de_actividad: '',
-        especificaciones: '',
     });
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
@@ -31,8 +33,6 @@ const AltaMascotas = () => {
         formDataObj.append('edad', formData.edad);
         formDataObj.append('tamano', formData.tamano);
         formDataObj.append('peso', formData.peso);
-        formDataObj.append('nivel_de_actividad', formData.nivel_de_actividad);
-        formDataObj.append('especificaciones', formData.especificaciones);
         formDataObj.append('img', formData.img); 
     
         try {
@@ -44,7 +44,8 @@ const AltaMascotas = () => {
             if (response.ok) {
                 const result = await response.json();
                 alert(result.message);
-                setFormData({ nombre: '', edad: '', tamano: '', peso: '', nivel_de_actividad: '', especificaciones: '', img: null });
+                setFormData({ nombre: '', edad: '', tamano: '', peso: '', img: null });
+                navigate('/'); 
             }
         } catch (error) {
             console.error('Error en la solicitud:', error);
@@ -105,16 +106,16 @@ const AltaMascotas = () => {
                             </select>
                         </div>
                         <div className="col">
-                            <label htmlFor="tamaño" className="form-label">Tamaño</label>
+                            <label htmlFor="tamano" className="form-label">Tamaño</label>
                             <select
-                                name="tamanio"
+                                name="tamano"
                                 className="form-select"
                                 required
                                 onChange={handleChange}
                             >
-                                {['Chico', 'Mediano', 'Grande'].map((tam) => (
-                                    <option key={tam} value={tam}>
-                                        {tam}
+                                {['Chico', 'Mediano', 'Grande'].map((tamano) => (
+                                    <option key={tamano} value={tamano}>
+                                        {tamano}
                                     </option>
                                 ))}
                             </select>
@@ -135,40 +136,9 @@ const AltaMascotas = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className="col">
-                            <label htmlFor="actividad" className="form-label">Nivel de actividad</label>
-                            <select
-                                name="actividad"
-                                className="form-select"
-                                required
-                                onChange={handleChange}
-                            >
-                                {['Activo', 'Moderado', 'Sedentario'].map((act) => (
-                                    <option key={act} value={act}>
-                                        {act}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+                        
                     </div>
 
-                    {/* Aquí siguen los campos para vacunación, especie, etc. */}
-
-                    <div className="textareas">
-                        <div className="mb-3">
-                            <label htmlFor="especificaciones" className="form-label">Especificaciones</label>
-                            <textarea
-                                name="especificaciones"
-                                placeholder="Detallar sobre el color, extremidades o partes faltantes, enfermedades u otros."
-                                className="form-control"
-                                rows="3"
-                                required
-                                value={formData.especificaciones}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        {/* Otros campos de texto como necesidades, requerimientos e historia */}
-                    </div>
                 </div>
 
                 <input
