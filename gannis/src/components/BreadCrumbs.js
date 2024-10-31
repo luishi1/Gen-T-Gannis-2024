@@ -18,7 +18,6 @@ const Breadcrumbs = () => {
                     const path = `/${pathnames.slice(0, index + 1).join('/')}`;
                     return (
                         <li key={path}>
-                            <span className="separator">/</span>
                             <Link to={path}>
                                 {value.charAt(0).toUpperCase() + value.slice(1)}
                             </Link>
