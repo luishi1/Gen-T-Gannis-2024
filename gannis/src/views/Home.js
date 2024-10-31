@@ -1,6 +1,7 @@
 // src/views/Home.js
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card/Card';
+import Breadcrumbs from '../components/BreadCrumbs';
 import '../ui/Home.css'
 
 const Home = () => {
@@ -64,6 +65,7 @@ const Home = () => {
                     <span className="visually-hidden">Next</span>
                 </button>
             </div>
+            <Breadcrumbs />
             <div className="text-center">
                 <h1>Bienvenidos a Gannis</h1>
                 <p>Esta es la página de inicio.</p>
