@@ -4,18 +4,15 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
 import '../ui/Forms.css';
-import Breadcrumbs from '../components/BreadCrumbs';
+import { useSession } from '../SessionContext';
 
 const Login = () => {
     const navigate = useNavigate();
+    const { login = null } = useSession() || {};
 
     const [formData, setFormData] = useState({
-        nombre: '',
-        edad: '',
-        tamano: '',
-        peso: '',
-        nivel_de_actividad: '',
-        especificaciones: '',
+        mail: '',
+        contrasena: '',
     });
 
     const handleRegister = (event) => {
@@ -23,29 +20,39 @@ const Login = () => {
         navigate('/register'); 
     };
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    }
+
     const handleLogin = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:8081/api/usuarios', {
+            const response = await fetch('http://localhost:8081/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
             });
+            
+            const data = await response.json();
 
             if (response.ok) {
-                const result = await response.json();
-                alert(result.message); 
-                setFormData({
-                    nombre: '',
-                    edad: '',
-                    tamano: '',
-                    peso: '',
-                    nivel_de_actividad: '',
-                    especificaciones: '',
-                });
+                // Handle successful login (e.g., redirect to another page)
+                let loginData = {
+                    mail: formData.mail,
+                    signInTime: Date.now(),
+                }
+                login(loginData)
+                navigate("/");
+            } else {
+                // Handle errors (e.g., invalid credentials)
+                console.error('Login fallido. Por favor intente de vuelta.');
             }
         } catch (error) {
             console.error('Error en la solicitud:', error);
@@ -55,18 +62,18 @@ const Login = () => {
     return (
         <div className="container container-ini">
             <h5 className="titleini">¡Bienvenido de vuelta!</h5>
-            <form action="comprobar_inicio.php" method="POST">
+            <form onSubmit={handleLogin} action="comprobar_inicio.php" method="POST">
                 <div className="input-group mb-3">
                     <span className="input-group-text in-se" id="basic-addon1">
                         <FontAwesomeIcon icon={faEnvelope} />
                     </span>
-                    <input name="mail" type="text" className="form-control" placeholder="Correo electrónico" />
+                    <input name="mail" value={formData.mail} onChange={handleChange} type="text" className="form-control" placeholder="Correo electrónico" />
                 </div>
                 <div className="input-group mb-3">
                     <span className="input-group-text in-se" id="basic-addon1">
                         <FontAwesomeIcon icon={faKey} />
                     </span>
-                    <input name="contrasena" type="password" className="form-control" placeholder="Contraseña" />
+                    <input name="contrasena" value={formData.contrasena} onChange={handleChange} type="password" className="form-control" placeholder="Contraseña" />
                 </div>
                 <div className="checkbox mb-3">
                     <label>
