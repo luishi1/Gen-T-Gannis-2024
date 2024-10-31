@@ -20,9 +20,6 @@ const MainContent = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forms" element={<Forms />} />
-                <Route path="/Cats" element={<Cats />} /> 
-                <Route path="/Dogs" element={<Dogs />} /> 
-                <Route path="/Pets" element={<Pets />} /> 
                 <Route path="/mascotadetalle" element={<MascotaDetalle />} />
             </Routes>
         </main>
