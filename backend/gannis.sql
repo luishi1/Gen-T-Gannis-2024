@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2024 a las 12:02:48
+-- Tiempo de generación: 31-10-2024 a las 12:56:21
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -45,24 +45,22 @@ CREATE TABLE `mascotas` (
   `nombre` varchar(25) NOT NULL,
   `edad` int(50) NOT NULL,
   `tamano` varchar(20) NOT NULL,
-  `peso` float NOT NULL,
-  `nivel_de_actividad` varchar(250) NOT NULL,
-  `especificaciones` varchar(450) NOT NULL
+  `peso` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `mascotas`
 --
 
-INSERT INTO `mascotas` (`id`, `nombre`, `edad`, `tamano`, `peso`, `nivel_de_actividad`, `especificaciones`) VALUES
-(1, 'Max', 3, 'Grande', 25.5, 'Alta', 'Ninguna'),
-(2, 'Luna', 2, 'Mediano', 8.2, 'Media', 'Requiere cepillado'),
-(3, 'Rocky', 1, 'Pequeño', 5, 'Baja', 'Requiere correa especial'),
-(4, 'Nina', 4, 'Grande', 20.3, 'Alta', 'Evitar zonas frías'),
-(5, 'Milo', 5, 'Pequeño', 7, 'Media', 'Requiere supervisión continua'),
-(6, 'Bella', 3, 'Mediano', 15.4, 'Baja', 'Evitar escaleras'),
-(7, 'Coco', 2, 'Grande', 30, 'Alta', 'Requiere espacio amplio'),
-(8, 'Simba', 6, 'Mediano', 9, 'Baja', 'Requiere comida especial');
+INSERT INTO `mascotas` (`id`, `nombre`, `edad`, `tamano`, `peso`) VALUES
+(1, 'Max', 3, 'Grande', 25.5),
+(2, 'Luna', 2, 'Mediano', 8.2),
+(3, 'Rocky', 1, 'Pequeño', 5),
+(4, 'Nina', 4, 'Grande', 20.3),
+(5, 'Milo', 5, 'Pequeño', 7),
+(6, 'Bella', 3, 'Mediano', 15.4),
+(7, 'Coco', 2, 'Grande', 30),
+(8, 'Simba', 6, 'Mediano', 9);
 
 -- --------------------------------------------------------
 

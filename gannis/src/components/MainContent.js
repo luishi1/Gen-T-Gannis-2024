@@ -6,7 +6,7 @@ import Login from '../views/Login';
 import About from '../views/About';
 import Register from '../views/Register';
 import Forms from '../views/AltaMascotas';
-import MascotaDetalle from '../views/MascotaDetalle'
+import Mascotas from '../views/Mascotas';
 
 const MainContent = () => {
     return (
@@ -17,7 +17,7 @@ const MainContent = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forms" element={<Forms />} />
-                <Route path="/mascotadetalle" element={<MascotaDetalle />} />
+                <Route path="/mascotas" element={<Mascotas />} />
             </Routes>
         </main>
     );
