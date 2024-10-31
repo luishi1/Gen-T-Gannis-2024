@@ -44,12 +44,9 @@ const AltaMascotas = () => {
                     nivel_de_actividad: '',
                     especificaciones: '',
                 });
-            } else {
-                alert('Hubo un error al registrar la mascota.');
             }
         } catch (error) {
             console.error('Error en la solicitud:', error);
-            alert('Error en la solicitud.');
         }
     };
 
@@ -60,7 +57,6 @@ const AltaMascotas = () => {
                 <div className="cabecera">
                     <FontAwesomeIcon icon={faPaw} id="r-mas" />
                     <h3 id="reg-m">Registro de mascota</h3>
-                    {/* Aquí podrías mostrar el mensaje si existe */}
                 </div>
                 <div className="text-mas">
                     <div className="alert alert-primary" role="alert">
