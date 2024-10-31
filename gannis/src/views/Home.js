@@ -5,20 +5,32 @@ import './Home.css'
 
 const Home = () => {
 
-    const [mascosas, setMascotas] = useState([]);
+    const [mascotas, setMascotas] = useState([]);
 
     const fetchMascotas = async () => {
+        console.log("entro al metodo de fetch mascotas")
         try {
-            const response = await fetch('http://localhost:3001/api/mascotas');
+            console.log("antes del endpoint")
+
+            const response = await fetch('http://localhost:8081/api/mascotas');
+            console.log("despues del endpoint")
+
             if (!response.ok) {
                 throw new Error('No se puede obtener los datos del server')
             }
+            console.log("antes de traer la data")
             const data = await response.json()
             setMascotas(data);
+            console.log(data);
+            console.log("entro el try")
         } catch (error) {
             console.log("Algo fallo al cargar a los animalitos");
         }
     }
+
+    useEffect(() => {
+        fetchMascotas();
+    }, []);
 
     return (
         <div className='home-cont'>
@@ -61,9 +73,10 @@ const Home = () => {
                 <h1>Bienvenidos a Gannis</h1>
                 <p>Esta es la página de inicio.</p>
                 <div className="d-flex justify-content-center flex-wrap">
-                    <Card title="Silvestre" text="Macho / 3 meses" imageUrl="url_de_imagen_gato_1" />
-                    <Card title="LOCURA" text="Hembra / 2 meses" imageUrl="url_de_imagen_gato_2" />
-                    <Card title="BEN 10" text="Macho / 1 mes" imageUrl="url_de_imagen_gato_3" />
+                    {
+                        mascotas.map((m) => (
+                            <Card key={m.id} title="Silvestre" text="Macho / 3 meses" imageUrl="url_de_imagen_gato_1" />
+                        ))}
                 </div>
             </div>
         </div>
