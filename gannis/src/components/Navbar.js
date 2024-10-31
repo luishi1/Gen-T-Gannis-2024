@@ -23,7 +23,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link ${location.pathname === '/formularios' ? 'nav-link-active:' : ''}`} to="/formularios">
+                            <Link className={`nav-link ${location.pathname === '/forms' ? 'nav-link-active' : ''}`} to="/forms">
                                 <i className="fa-solid fa-circle-info"></i> Formularios
                             </Link>
                         </li>

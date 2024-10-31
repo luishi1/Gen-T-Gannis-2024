@@ -5,6 +5,7 @@ import Home from '../views/Home';
 import Login from '../views/Login';
 import About from '../views/About';
 import Register from '../views/Register'
+import Forms from '../views/AltaMascotas'
 
 const MainContent = () => {
     return (
@@ -14,6 +15,7 @@ const MainContent = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/forms" element={<Forms />} />
             </Routes>
         </main>
     );

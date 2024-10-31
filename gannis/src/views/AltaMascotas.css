@@ -1,0 +1,81 @@
+.form-mas#regis-mas {
+	max-width: 700px;
+	margin-top: 40px;
+	box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.15);
+	padding: 20px;
+	border: 1px solid rgba(128, 128, 128, 0.171);
+	text-align: center;
+}
+
+.fa-paw#r-mas {
+	color: #ff9100;
+	font-size: 50px;
+}
+
+h3#reg-m {
+	color: #ff9100;
+}
+
+.poli {
+	color: #ff9100;
+	text-decoration: none;
+}
+
+.text-mas {
+	max-width: 580px;
+	text-align-last: left;
+	margin: 0px 20px 0px 20px;
+}
+
+.form-check#izqqq {
+	margin-right: 36px;
+}
+
+.form-check#izqq {
+	margin-right: 15px;
+}
+
+.form-check#izq {
+	margin-right: 60px;
+}
+
+div#derrr {
+	margin-right: 10px;
+}
+
+textarea#textarea {
+	margin-top: 20px;
+	margin-bottom: 25px;
+}
+
+.textareas {
+	margin-top: 20px;
+}
+
+.col#mascota {
+	min-width: auto;
+	height: auto;
+	background-color: transparent;
+	margin: auto;
+	padding: auto;
+	box-shadow: none;
+}
+
+div#radio-btn {
+	text-align-last: center;
+}
+
+.d-flex#r-d {
+	justify-content: center;
+}
+
+label#mascotas-form {
+	font-size: large;
+	font-weight: 500;
+	color: dimgrey;
+}
+
+.btn-secondary#res-mas {
+	width: 120px;
+	margin-top: 19px;
+}
