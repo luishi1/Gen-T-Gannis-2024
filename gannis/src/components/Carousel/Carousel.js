@@ -42,7 +42,7 @@ function Carousel() {
         <div className="container">
             <div className="carousel container">
                 <div class="titulocarrusel">
-                    <h3>Gatos en adopción</h3>
+                    <h3>Mascotas en adopción</h3>
                 </div>
                 <button onClick={prevSlide} disabled={activeIndex === 0} className="carousel__anterior">
                     ⬅
