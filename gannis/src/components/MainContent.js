@@ -14,6 +14,7 @@ const MainContent = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
+                {/* <Route path="/login" element={user ? <Login /> : <Navigate to="/" />}  /> */}
                 <Route path="/about" element={<About />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forms" element={<Forms />} />
