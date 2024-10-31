@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 import '../ui/AltaMascotas.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const AltaMascotas = () => {
     const [formData, setFormData] = useState({
@@ -9,41 +11,41 @@ const AltaMascotas = () => {
         edad: '',
         tamano: '',
         peso: '',
-        nivel_de_actividad: '',
-        especificaciones: '',
     });
 
+    const navigate = useNavigate();
+
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, type, files } = e.target;
+
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value,
+            [name]: type === 'file' ? files[0] : value
         }));
     };
 
+
     const handleSubmit = async (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
+
+        const formDataObj = new FormData();
+        formDataObj.append('nombre', formData.nombre);
+        formDataObj.append('edad', formData.edad);
+        formDataObj.append('tamano', formData.tamano);
+        formDataObj.append('peso', formData.peso);
+        formDataObj.append('img', formData.img);
 
         try {
             const response = await fetch('http://localhost:8081/api/mascotas', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
+                body: formDataObj,
             });
 
             if (response.ok) {
                 const result = await response.json();
-                alert(result.message); 
-                setFormData({
-                    nombre: '',
-                    edad: '',
-                    tamano: '',
-                    peso: '',
-                    nivel_de_actividad: '',
-                    especificaciones: '',
-                });
+                alert(result.message);
+                setFormData({ nombre: '', edad: '', tamano: '', peso: '', img: null });
+                navigate('/');
             }
         } catch (error) {
             console.error('Error en la solicitud:', error);
@@ -71,6 +73,7 @@ const AltaMascotas = () => {
                                 value={formData.nombre}
                                 className="form-control"
                                 required
+                                accept="image/png, image/jpeg, image/jpg, image/gif"
                                 onChange={handleChange}
                             />
                         </div>
@@ -104,16 +107,16 @@ const AltaMascotas = () => {
                             </select>
                         </div>
                         <div className="col">
-                            <label htmlFor="tamaño" className="form-label">Tamaño</label>
+                            <label htmlFor="tamano" className="form-label">Tamaño</label>
                             <select
-                                name="tamanio"
+                                name="tamano"
                                 className="form-select"
                                 required
                                 onChange={handleChange}
                             >
-                                {['Chico', 'Mediano', 'Grande'].map((tam) => (
-                                    <option key={tam} value={tam}>
-                                        {tam}
+                                {['Chico', 'Mediano', 'Grande'].map((tamano) => (
+                                    <option key={tamano} value={tamano}>
+                                        {tamano}
                                     </option>
                                 ))}
                             </select>
@@ -134,40 +137,9 @@ const AltaMascotas = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className="col">
-                            <label htmlFor="actividad" className="form-label">Nivel de actividad</label>
-                            <select
-                                name="actividad"
-                                className="form-select"
-                                required
-                                onChange={handleChange}
-                            >
-                                {['Activo', 'Moderado', 'Sedentario'].map((act) => (
-                                    <option key={act} value={act}>
-                                        {act}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+
                     </div>
 
-                    {/* Aquí siguen los campos para vacunación, especie, etc. */}
-
-                    <div className="textareas">
-                        <div className="mb-3">
-                            <label htmlFor="especificaciones" className="form-label">Especificaciones</label>
-                            <textarea
-                                name="especificaciones"
-                                placeholder="Detallar sobre el color, extremidades o partes faltantes, enfermedades u otros."
-                                className="form-control"
-                                rows="3"
-                                required
-                                value={formData.especificaciones}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        {/* Otros campos de texto como necesidades, requerimientos e historia */}
-                    </div>
                 </div>
 
                 <input

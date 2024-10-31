@@ -1,9 +1,8 @@
 import React from 'react';
 import './Card.css'; 
 
-const Card = ({ title, text, imageUrl }) => {
+const Card = ({ title, age, size, weight, imageUrl }) => {
   return (
-    <a href="/mascotadetalle">
       <div className="card card-min">
         <img 
           className="card_image" 
@@ -13,11 +12,10 @@ const Card = ({ title, text, imageUrl }) => {
           alt={title} 
         />
         <p className="card_name">{title}</p>
-        <div className="grid-container">
-          <div className="about">{text}</div>
-        </div>
+        <p className="card_age">Edad: {age} años</p>
+        <p className="card_size">Tamaño: {size}</p>
+        <p className="card_weight">Peso: {weight} kg</p>
       </div>
-    </a>
   );
 };
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2024 a las 11:42:21
+-- Tiempo de generación: 31-10-2024 a las 20:53:34
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -46,23 +46,22 @@ CREATE TABLE `mascotas` (
   `edad` int(50) NOT NULL,
   `tamano` varchar(20) NOT NULL,
   `peso` float NOT NULL,
-  `nivel_de_actividad` varchar(250) NOT NULL,
-  `especificaciones` varchar(450) NOT NULL
+  `image` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `mascotas`
 --
 
-INSERT INTO `mascotas` (`id`, `nombre`, `edad`, `tamano`, `peso`, `nivel_de_actividad`, `especificaciones`) VALUES
-(1, 'Max', 3, 'Grande', 25.5, 'Alta', 'Ninguna'),
-(2, 'Luna', 2, 'Mediano', 8.2, 'Media', 'Requiere cepillado'),
-(3, 'Rocky', 1, 'Pequeño', 5, 'Baja', 'Requiere correa especial'),
-(4, 'Nina', 4, 'Grande', 20.3, 'Alta', 'Evitar zonas frías'),
-(5, 'Milo', 5, 'Pequeño', 7, 'Media', 'Requiere supervisión continua'),
-(6, 'Bella', 3, 'Mediano', 15.4, 'Baja', 'Evitar escaleras'),
-(7, 'Coco', 2, 'Grande', 30, 'Alta', 'Requiere espacio amplio'),
-(8, 'Simba', 6, 'Mediano', 9, 'Baja', 'Requiere comida especial');
+INSERT INTO `mascotas` (`id`, `nombre`, `edad`, `tamano`, `peso`, `image`) VALUES
+(12, 'Max', 11, '', 12, '12.jpeg'),
+(13, 'Luna ', 11, '', 12, '13.jpeg'),
+(14, 'Rocky', 3, '', 12, '14.jpeg'),
+(15, 'Nina', 3, '', 12, '15.jpeg'),
+(16, 'Milo', 3, '', 12, '16.jpeg'),
+(17, 'Bella', 3, '', 12, '17.jpg'),
+(18, 'Luca', 6, '', 1, '18.jpeg'),
+(44, 'test', 3, 'Mediano', 13, '44.jpeg');
 
 -- --------------------------------------------------------
 
@@ -72,7 +71,6 @@ INSERT INTO `mascotas` (`id`, `nombre`, `edad`, `tamano`, `peso`, `nivel_de_acti
 
 CREATE TABLE `usuarios` (
   `id` int(10) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
   `contrasena` varchar(72) NOT NULL,
   `mail` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -81,17 +79,17 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `contrasena`, `mail`) VALUES
-(1, 'Juan Pérez', 'contraseña123', 'juan.perez@example.com'),
-(2, 'María Gómez', 'segura456', 'maria.gomez@example.com'),
-(3, 'Carlos López', 'miContraseña789', 'carlos.lopez@example.com'),
-(4, 'Ana Martínez', '1234abc', 'ana.martinez@example.com'),
-(5, 'Luis Rodríguez', 'pass5678', 'luis.rodriguez@example.com'),
-(6, 'Laura Fernández', 'password2023', 'laura.fernandez@example.com'),
-(7, 'Javier Sánchez', 'javier1234', 'javier.sanchez@example.com'),
-(8, 'Sofía Torres', 's0f1aP@ss', 'sofia.torres@example.com'),
-(9, 'Diego Ramírez', 'd1eg0R@me', 'diego.ramirez@example.com'),
-(10, 'Valentina Castro', 'valen2023', 'valentina.castro@example.com');
+INSERT INTO `usuarios` (`id`, `contrasena`, `mail`) VALUES
+(1, 'contraseña123', 'juan.perez@example.com'),
+(2, 'segura456', 'maria.gomez@example.com'),
+(3, 'miContraseña789', 'carlos.lopez@example.com'),
+(4, '1234abc', 'ana.martinez@example.com'),
+(5, 'pass5678', 'luis.rodriguez@example.com'),
+(6, 'password2023', 'laura.fernandez@example.com'),
+(7, 'javier1234', 'javier.sanchez@example.com'),
+(8, 's0f1aP@ss', 'sofia.torres@example.com'),
+(9, 'd1eg0R@me', 'diego.ramirez@example.com'),
+(10, 'valen2023', 'valentina.castro@example.com');
 
 --
 -- Índices para tablas volcadas
@@ -129,7 +127,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
