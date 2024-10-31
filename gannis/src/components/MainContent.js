@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from '../views/Home';
 import Login from '../views/Login';
 import About from '../views/About';
+import Register from '../views/Register'
 
 const MainContent = () => {
     return (
@@ -12,6 +13,7 @@ const MainContent = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/register" element={<Register />} />
             </Routes>
         </main>
     );

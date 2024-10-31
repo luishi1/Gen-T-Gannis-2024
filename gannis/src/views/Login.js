@@ -1,38 +1,43 @@
-// src/views/Login.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
+import './Forms.css';
 
 const Login = () => {
     const navigate = useNavigate();
 
-    const handleRegister = () => {
+    const handleRegister = (event) => {
+        event.preventDefault(); // Evita que el enlace recargue la página
         navigate('/register'); 
     };
 
     return (
-        <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
-            <div className="login-container text-center">
-                <h1 className="text-warning mb-4">¡Bienvenido de vuelta!</h1>
-                <div className="card p-4">
-                    <form>
-                        <div className="input-group mb-3">
-                            <span className="input-group-text"><i className="fas fa-envelope"></i></span>
-                            <input type="email" className="form-control" placeholder="Correo electrónico" required />
-                        </div>
-                        <div className="input-group mb-3">
-                            <span className="input-group-text"><i className="fas fa-key"></i></span>
-                            <input type="password" className="form-control" placeholder="Contraseña" required />
-                        </div>
-                        <div className="form-check mb-3">
-                            <input type="checkbox" className="form-check-input" id="rememberMe" />
-                            <label className="form-check-label" htmlFor="rememberMe">Recuérdame</label>
-                        </div>
-                        <button type="submit" className="btn btn-primary w-100">Iniciar Sesión</button>
-                    </form>
+        <div className="container container-ini">
+            <h5 className="titleini">¡Bienvenido de vuelta!</h5>
+            <form action="comprobar_inicio.php" method="POST">
+                <div className="input-group mb-3">
+                    <span className="input-group-text in-se" id="basic-addon1">
+                        <FontAwesomeIcon icon={faEnvelope} />
+                    </span>
+                    <input name="mail" type="text" className="form-control" placeholder="Correo electrónico" />
                 </div>
-                <div className="card p-3 mt-3">
-                    <p>¿No tienes cuenta? <button onClick={handleRegister} className="btn btn-link">Regístrate</button></p>
+                <div className="input-group mb-3">
+                    <span className="input-group-text in-se" id="basic-addon1">
+                        <FontAwesomeIcon icon={faKey} />
+                    </span>
+                    <input name="contrasena" type="password" className="form-control" placeholder="Contraseña" />
                 </div>
+                <div className="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="recordar" value="SI" /> Recuerdame
+                    </label>
+                </div>
+                <button className="w-100 btn btn-lg btn-primary" type="submit">Iniciar Sesión</button>
+            </form>
+            <div className="footerini">
+                ¿No tienes cuenta?
+                <a href="#" onClick={handleRegister}> Regístrate</a>
             </div>
         </div>
     );

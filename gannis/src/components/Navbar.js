@@ -31,8 +31,8 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
                 </div>
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <Link className="btn btn-primary me-md-2" to="/inicio_sesion">Iniciar sesión</Link>
-                        <button className="btn btn-primary" data-bs-target="#registro" data-bs-toggle="modal" data-bs-dismiss="modal">Registrarse</button>
+                        <Link className="btn btn-primary me-md-2" to="/login">Iniciar sesión</Link>
+                        <Link className="btn btn-primary me-md-2" to="/register">Registrarse</Link>
                         <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
                     </div>
                 </div>
