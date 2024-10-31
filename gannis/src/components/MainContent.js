@@ -6,9 +6,6 @@ import Login from '../views/Login';
 import About from '../views/About';
 import Register from '../views/Register';
 import Forms from '../views/AltaMascotas';
-import Cats from '../views/Cats'; 
-import Dogs from '../views/Dogs'; 
-import Pets from '../views/Pets'; 
 import MascotaDetalle from '../views/MascotaDetalle'
 
 const MainContent = () => {
