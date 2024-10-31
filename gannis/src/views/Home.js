@@ -8,21 +8,16 @@ const Home = () => {
     const [mascotas, setMascotas] = useState([]);
 
     const fetchMascotas = async () => {
-        console.log("entro al metodo de fetch mascotas")
+        console.log("Emtro al metodo de fetch mascotas")
         try {
-            console.log("antes del endpoint")
-
             const response = await fetch('http://localhost:8081/api/mascotas');
-            console.log("despues del endpoint")
 
             if (!response.ok) {
                 throw new Error('No se puede obtener los datos del server')
             }
-            console.log("antes de traer la data")
             const data = await response.json()
             setMascotas(data);
-            console.log(data);
-            console.log("entro el try")
+            console.log(data)
         } catch (error) {
             console.log("Algo fallo al cargar a los animalitos");
         }
@@ -75,7 +70,7 @@ const Home = () => {
                 <div className="d-flex justify-content-center flex-wrap">
                     {
                         mascotas.map((m) => (
-                            <Card key={m.id} title="Silvestre" text="Macho / 3 meses" imageUrl="url_de_imagen_gato_1" />
+                            <Card key={m.id} title={m.nombre} text={m.especificaciones} imageUrl="url_de_imagen_gato_1" />
                         ))}
                 </div>
             </div>
