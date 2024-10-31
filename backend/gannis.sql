@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2024 a las 12:56:21
+-- Tiempo de generación: 31-10-2024 a las 20:53:34
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -45,22 +45,23 @@ CREATE TABLE `mascotas` (
   `nombre` varchar(25) NOT NULL,
   `edad` int(50) NOT NULL,
   `tamano` varchar(20) NOT NULL,
-  `peso` float NOT NULL
+  `peso` float NOT NULL,
+  `image` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `mascotas`
 --
 
-INSERT INTO `mascotas` (`id`, `nombre`, `edad`, `tamano`, `peso`) VALUES
-(1, 'Max', 3, 'Grande', 25.5),
-(2, 'Luna', 2, 'Mediano', 8.2),
-(3, 'Rocky', 1, 'Pequeño', 5),
-(4, 'Nina', 4, 'Grande', 20.3),
-(5, 'Milo', 5, 'Pequeño', 7),
-(6, 'Bella', 3, 'Mediano', 15.4),
-(7, 'Coco', 2, 'Grande', 30),
-(8, 'Simba', 6, 'Mediano', 9);
+INSERT INTO `mascotas` (`id`, `nombre`, `edad`, `tamano`, `peso`, `image`) VALUES
+(12, 'Max', 11, '', 12, '12.jpeg'),
+(13, 'Luna ', 11, '', 12, '13.jpeg'),
+(14, 'Rocky', 3, '', 12, '14.jpeg'),
+(15, 'Nina', 3, '', 12, '15.jpeg'),
+(16, 'Milo', 3, '', 12, '16.jpeg'),
+(17, 'Bella', 3, '', 12, '17.jpg'),
+(18, 'Luca', 6, '', 1, '18.jpeg'),
+(44, 'test', 3, 'Mediano', 13, '44.jpeg');
 
 -- --------------------------------------------------------
 
@@ -126,7 +127,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
