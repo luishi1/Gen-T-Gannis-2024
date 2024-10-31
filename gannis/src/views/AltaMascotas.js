@@ -1,67 +1,70 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
-import '../ui/AltaMascotas.css'; 
+import '../ui/AltaMascotas.css';
 
 const AltaMascotas = () => {
     const [formData, setFormData] = useState({
-        principal: null,
         nombre: '',
-        img: null,
         edad: '',
-        tamaño: '',
+        tamano: '',
         peso: '',
-        actividad: '',
-        vacunado: '',
-        especie: '',
-        esteril: '',
-        sexo: '',
-        desparasitado: '',
+        nivel_de_actividad: '',
         especificaciones: '',
-        necesidades: '',
-        requerimientos: '',
-        historia: '',
-        politica_priv: false,
     });
 
     const handleChange = (e) => {
-        const { name, value, type, files, checked } = e.target;
+        const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
-            [name]: type === 'file' ? files : type === 'checkbox' ? checked : value,
+            [name]: value,
         }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Aquí iría la lógica para enviar el formulario
-        console.log(formData);
+    const handleSubmit = async (e) => {
+        e.preventDefault(); 
+
+        try {
+            const response = await fetch('http://localhost:8081/api/mascotas', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                alert(result.message); 
+                setFormData({
+                    nombre: '',
+                    edad: '',
+                    tamano: '',
+                    peso: '',
+                    nivel_de_actividad: '',
+                    especificaciones: '',
+                });
+            } else {
+                alert('Hubo un error al registrar la mascota.');
+            }
+        } catch (error) {
+            console.error('Error en la solicitud:', error);
+            alert('Error en la solicitud.');
+        }
     };
+
 
     return (
         <div className="form-mas" id="regis-mas">
             <form onSubmit={handleSubmit} encType="multipart/form-data" id="mascotas">
                 <div className="cabecera">
-                <FontAwesomeIcon icon={faPaw} id="r-mas" />
+                    <FontAwesomeIcon icon={faPaw} id="r-mas" />
                     <h3 id="reg-m">Registro de mascota</h3>
                     {/* Aquí podrías mostrar el mensaje si existe */}
                 </div>
                 <div className="text-mas">
                     <div className="alert alert-primary" role="alert">
                         Se informa que todos los campos son obligatorios
-                    </div>
-                    <div className="row">
-                        <div className="col">
-                            <label htmlFor="principal" className="form-label">Foto principal</label>
-                            <input
-                                type="file"
-                                name="principal"
-                                id="principal"
-                                className="form-control"
-                                required
-                                onChange={handleChange}
-                            />
-                        </div>
                     </div>
                     <div className="row">
                         <div className="col">
@@ -76,13 +79,12 @@ const AltaMascotas = () => {
                             />
                         </div>
                         <div className="col">
-                            <label htmlFor="img" className="form-label">Fotos</label>
+                            <label htmlFor="img" className="form-label">Foto</label>
                             <input
                                 type="file"
                                 name="img"
                                 id="img"
                                 className="form-control"
-                                multiple
                                 required
                                 onChange={handleChange}
                             />
@@ -108,7 +110,7 @@ const AltaMascotas = () => {
                         <div className="col">
                             <label htmlFor="tamaño" className="form-label">Tamaño</label>
                             <select
-                                name="tamaño"
+                                name="tamanio"
                                 className="form-select"
                                 required
                                 onChange={handleChange}

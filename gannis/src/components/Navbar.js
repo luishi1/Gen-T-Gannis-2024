@@ -30,16 +30,6 @@ const Navbar = ({ darkMode, toggleDarkMode, view }) => {
                                 <i className="fa-solid fa-circle-info"></i> Formularios
                             </Link>
                         </li>
-                        <li className="nav-item dropdown">
-                            <a className={`nav-link dropdown-toggle ${isActiveDropdown ? 'nav-link2' : ''}`} id="dropdownMenuButton1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i className="fa-solid fa-caret-down"></i> Mascotas
-                            </a>
-                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><Link className="dropdown-item" to="/Pets"><i className="fas fa-paw"></i> Todos</Link></li>
-                                <li><Link className="dropdown-item" to="/Cats"><i className="fas fa-cat"></i> Gatos</Link></li>
-                                <li><Link className="dropdown-item" to="/Dogs"><i className="fas fa-dog"></i> Perros</Link></li>
-                            </ul>
-                        </li>
                     </ul>
                 </div>
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
