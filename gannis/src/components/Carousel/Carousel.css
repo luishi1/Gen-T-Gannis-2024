@@ -113,7 +113,8 @@
 .carousel__lista,
 .carousel__lista2 {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
 }
 
 .card-min {
