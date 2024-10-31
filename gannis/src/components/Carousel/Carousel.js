@@ -45,13 +45,13 @@ function Carousel() {
                     <h3>Gatos en adopción</h3>
                 </div>
                 <button onClick={prevSlide} disabled={activeIndex === 0} className="carousel__anterior">
-                    Previous
+                    ⬅
                 </button>
                 <div className="carousel__lista">
                     {renderedCards}
                 </div>
                 <button onClick={nextSlide} disabled={activeIndex === mascotas.length - 3} className="carousel__siguiente3">
-                    Next
+                    ➡
                 </button>
             </div>
         </div>   
