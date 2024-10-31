@@ -1,0 +1,34 @@
+.breadcrumbs {
+    background-color: #f8f9fa; /* Fondo gris claro */
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    font-family: Arial, sans-serif; /* Fuente */
+  }
+  
+  .breadcrumbs ol {
+    list-style: none; /* Sin viñetas */
+    display: flex; /* Flexbox para alineación horizontal */
+    padding: 0; /* Sin padding */
+    margin: 0; /* Sin margen */
+  }
+  
+  .breadcrumbs li {
+    display: flex; /* Flexbox para alineación */
+    align-items: center; /* Centra verticalmente */
+  }
+  
+  .breadcrumbs a {
+    text-decoration: none; /* Sin subrayado */
+    color: #007bff; /* Color azul */
+    transition: color 0.3s; /* Transición suave para el color */
+  }
+  
+  .breadcrumbs a:hover {
+    color: #0056b3; /* Color azul más oscuro al pasar el cursor */
+  }
+  
+  .separator {
+    margin: 0 5px; /* Espaciado horizontal para el separador */
+    color: #6c757d; /* Color gris para el separador */
+  }

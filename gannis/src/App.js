@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import MainContent from './components/MainContent'; // Asegúrate de que la ruta sea correcta
 import Footer from './components/layouts/footer';
+import Breadcrumbs from './components/BreadCrumbs';
 
 const App = () => {
     const [darkMode, setDarkMode] = useState(false);
@@ -15,6 +16,7 @@ const App = () => {
     return (
         <BrowserRouter>
             <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+            <Breadcrumbs />
             <MainContent />
             <Footer/>
         </BrowserRouter>
