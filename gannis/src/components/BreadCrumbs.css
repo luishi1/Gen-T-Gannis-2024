@@ -1,34 +1,89 @@
-.breadcrumbs {
-    background-color: #f8f9fa; /* Fondo gris claro */
-    padding: 10px 15px; /* Espaciado interno */
-    border-radius: 5px; /* Bordes redondeados */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    font-family: Arial, sans-serif; /* Fuente */
-  }
-  
-  .breadcrumbs ol {
-    list-style: none; /* Sin viñetas */
-    display: flex; /* Flexbox para alineación horizontal */
-    padding: 0; /* Sin padding */
-    margin: 0; /* Sin margen */
-  }
-  
-  .breadcrumbs li {
-    display: flex; /* Flexbox para alineación */
-    align-items: center; /* Centra verticalmente */
-  }
-  
-  .breadcrumbs a {
-    text-decoration: none; /* Sin subrayado */
-    color: #007bff; /* Color azul */
-    transition: color 0.3s; /* Transición suave para el color */
-  }
-  
-  .breadcrumbs a:hover {
-    color: #0056b3; /* Color azul más oscuro al pasar el cursor */
-  }
-  
-  .separator {
-    margin: 0 5px; /* Espaciado horizontal para el separador */
-    color: #6c757d; /* Color gris para el separador */
-  }
+.container {
+	margin-top: 80px;
+	width: 90%;
+}
+
+.breadcrumb {
+	padding: 5px;
+	font-size: 15px;
+	color: #fff;
+	background: rgba(0, 0, 0, 0.103);
+	display: inline-block;
+	border-radius: 15px;
+	text-shadow: 0 1px 0 rgba(102, 102, 102, 0.904);
+	font-weight: 600;
+}
+
+.breadcrumb a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.breadcrumb li {
+	display: inline-block;
+	padding: 0 20px;
+	line-height: 30px;
+	background: #acd1f9;
+	position: relative;
+	border: 0 #acd1f9;
+	cursor: pointer;
+}
+
+.breadcrumb .b-active {
+	background-color: #f9c1cb;
+	border-color: #f9c1cb;
+}
+
+.breadcrumb .b-active:hover {
+	background-color: #fcb4c1;
+	border-color: #fcb4c1;
+}
+
+.breadcrumb li {
+	margin-left: 25px;
+}
+
+.breadcrumb li:hover {
+	background: #9ac8f8;
+	border-color: #9ac8f8;
+	margin-left: 28px;
+}
+
+.breadcrumb li:before,
+.breadcrumb li:after {
+	content: "";
+	position: absolute;
+	border: 15px solid transparent;
+	border-right: 0;
+}
+
+.breadcrumb li:before {
+	right: 100%;
+	border-top-color: inherit;
+	border-bottom-color: inherit;
+}
+
+.breadcrumb li:after {
+	left: 100%;
+	border-left-color: inherit;
+}
+
+.breadcrumb li:first-child {
+	border-radius: 10px 0 0 10px;
+	padding-left: 15px;
+	margin-left: 0;
+}
+
+.breadcrumb li:first-child:before {
+	content: none;
+}
+
+.breadcrumb>li:last-child {
+	border-radius: 0 10px 10px 0;
+	padding-right: 15px;
+	margin-right: 0;
+}
+
+.breadcrumb>li:last-child:after {
+	content: none;
+}

@@ -6,8 +6,9 @@ const Breadcrumbs = () => {
     const pathnames = location.pathname.split('/').filter(x => x);
 
     return (
-        <nav className="breadcrumbs">
-            <ol>
+
+        <nav className="container">
+            <ol className="breadcrumb">
                 <li>
                     <Link to="/">
                         Inicio

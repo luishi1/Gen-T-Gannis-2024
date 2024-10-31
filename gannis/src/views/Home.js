@@ -1,31 +1,36 @@
 // src/views/Home.js
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card/Card';
-import '../ui/Home.css'
+import Breadcrumbs from '../components/BreadCrumbs';
+import '../ui/Home.css';
 
 const Home = () => {
-
     const [mascotas, setMascotas] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const fetchMascotas = async () => {
-        console.log("Emtro al metodo de fetch mascotas")
+        console.log("Entró al método de fetch mascotas");
         try {
             const response = await fetch('http://localhost:8081/api/mascotas');
 
             if (!response.ok) {
-                throw new Error('No se puede obtener los datos del server')
+                throw new Error('No se puede obtener los datos del server');
             }
-            const data = await response.json()
+            const data = await response.json();
             setMascotas(data);
-            console.log(data)
+            console.log(data);
         } catch (error) {
-            console.log("Algo fallo al cargar a los animalitos");
+            console.log("Algo falló al cargar a los animalitos");
         }
-    }
+    };
 
     useEffect(() => {
         fetchMascotas();
     }, []);
+
+    const filteredMascotas = mascotas.filter(m =>
+        m.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div className='home-cont'>
@@ -64,14 +69,28 @@ const Home = () => {
                     <span className="visually-hidden">Next</span>
                 </button>
             </div>
-            <div className="text-center">
+            <Breadcrumbs />
+            <div className="text-center mt-4">
                 <h1>Bienvenidos a Gannis</h1>
                 <p>Esta es la página de inicio.</p>
+                <div className="input-group mb-3">
+                    <input 
+                        type="text" 
+                        className="form-control" 
+                        placeholder="Buscar mascota por nombre"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <button className="btn btn-outline-secondary" type="button">Buscar</button>
+                </div>
                 <div className="d-flex justify-content-center flex-wrap">
                     {
-                        mascotas.map((m) => (
-                            <Card key={m.id} title={m.nombre} text={m.especificaciones} imageUrl="url_de_imagen_gato_1" />
-                        ))}
+                        filteredMascotas.map((m) => (
+                            <div className="col-md-4 mb-4" key={m.id}>
+                                <Card title={m.nombre} text={m.especificaciones} imageUrl="url_de_imagen_gato_1" />
+                            </div>
+                        ))
+                    }
                 </div>
             </div>
         </div>

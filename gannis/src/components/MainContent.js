@@ -4,8 +4,8 @@ import { Routes, Route } from 'react-router-dom';
 import Home from '../views/Home';
 import Login from '../views/Login';
 import About from '../views/About';
-import Register from '../views/Register'
-import Forms from '../views/AltaMascotas'
+import Register from '../views/Register';
+import Forms from '../views/AltaMascotas';
 import MascotaDetalle from '../views/MascotaDetalle'
 
 const MainContent = () => {

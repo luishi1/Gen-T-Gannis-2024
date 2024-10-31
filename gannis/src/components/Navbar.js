@@ -3,8 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import DarkModeToggle from './DarkModeToggle';
 import './Navbar.css';
 
-const Navbar = ({ darkMode, toggleDarkMode }) => {
+const Navbar = ({ darkMode, toggleDarkMode, view }) => {
     const location = useLocation(); // Obtén la ubicación actual
+
+    // Determina si el dropdown debe tener una clase especial
+    const isActiveDropdown = (view === 'Pets' || view === 'Cats' || view === 'Dogs');
 
     return (
         <nav className={`navbar navbar-expand-lg ${darkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'}`}>

@@ -1,16 +1,24 @@
 import React from 'react';
 import './Card.css'; 
 
-function Card({ title, text, imageUrl }) {
-    return (
-        <div className="card m-2" style={{ width: '18rem' }}>
-            <img src={imageUrl} className="card-img-top" alt={title} />
-            <div className="card-body">
-                <h5 className="card-title">{title}</h5>
-                <p className="card-text">{text}</p>
-            </div>
+const Card = ({ title, text, imageUrl }) => {
+  return (
+    <a href="/mascotadetalle">
+      <div className="card card-min">
+        <img 
+          className="card_image" 
+          height="220px" 
+          src={imageUrl} 
+          onError={(e) => { e.target.src = "img/errorImg.png"; }} // Fallback para la imagen
+          alt={title} 
+        />
+        <p className="card_name">{title}</p>
+        <div className="grid-container">
+          <div className="about">{text}</div>
         </div>
-    );
-}
+      </div>
+    </a>
+  );
+};
 
 export default Card;
