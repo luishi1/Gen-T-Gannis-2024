@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 import '../ui/AltaMascotas.css';
-import Breadcrumbs from '../components/BreadCrumbs';
 
 const AltaMascotas = () => {
     const [formData, setFormData] = useState({
@@ -55,7 +54,6 @@ const AltaMascotas = () => {
 
     return (
         <div className="form-mas" id="regis-mas">
-            <Breadcrumbs />
             <form onSubmit={handleSubmit} encType="multipart/form-data" id="mascotas">
                 <div className="cabecera">
                     <FontAwesomeIcon icon={faPaw} id="r-mas" />

@@ -8,9 +8,6 @@ const Navbar = ({ darkMode, toggleDarkMode, view }) => {
     const location = useLocation(); // Obtén la ubicación actual
     console.log("location: " + location.pathname);
 
-    // Determina si el dropdown debe tener una clase especial
-    const isActiveDropdown = (view === 'Pets' || view === 'Cats' || view === 'Dogs');
-
     return (
         <><nav className={`navbar navbar-expand-lg ${darkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'}`}>
             <div className="container-fluid">
@@ -30,6 +27,11 @@ const Navbar = ({ darkMode, toggleDarkMode, view }) => {
                         <li className="nav-item">
                             <Link className={`nav-link ${location.pathname === '/forms' ? 'nav-link-active' : ''}`} to="/forms">
                                 <i className="fa-solid fa-circle-info"></i> Formularios
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className={`nav-link ${location.pathname === '/forms' ? 'nav-link-active' : ''}`} to="/mascotas">
+                                <i className="fa-solid fa-circle-info"></i> Mascotas
                             </Link>
                         </li>
                     </ul>

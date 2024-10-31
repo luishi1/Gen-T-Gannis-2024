@@ -2,9 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from '../components/Carousel/Carousel';
 import Breadcrumbs from '../components/BreadCrumbs';
+import { useSession} from '../SessionContext';
 import '../ui/Home.css';
 
 const Home = () => {
+    const { session = null } = useSession() || {};
     const [mascotas, setMascotas] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -22,6 +24,7 @@ const Home = () => {
         } catch (error) {
             console.log("Algo falló al cargar a los animalitos");
         }
+        console.log(session)
     };
 
     useEffect(() => {
@@ -73,7 +76,9 @@ const Home = () => {
             <div className="text-center mt-4">
                 <h1>Bienvenidos a Gannis</h1>
                 <p>Esta es la página de inicio.</p>
-
+                <div>
+                    {session ? <h1>Bienvenido, usuario!</h1> : <h1>Por favor, inicia sesion</h1>}
+                </div>
 
                 <div className="d-flex justify-content-center flex-wrap">
                     <Carousel />

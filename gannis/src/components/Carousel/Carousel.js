@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../Card/Card";
 import './Carousel.css'
 
@@ -7,18 +7,18 @@ function Carousel() {
     const [mascotas, setMascotas] = useState([]);
 
     const fetchMascotas = async () => {
-        console.log("Emtro al metodo de fetch mascotas")
+        console.log("Entró al método de fetch mascotas");
         try {
             const response = await fetch('http://localhost:8081/api/mascotas');
 
             if (!response.ok) {
-                throw new Error('No se puede obtener los datos del server')
+                throw new Error('No se puede obtener los datos del server');
             }
-            const data = await response.json()
+            const data = await response.json();
             setMascotas(data);
-            console.log(data)
+            console.log(data);
         } catch (error) {
-            console.log("Algo fallo al cargar a los animalitos");
+            console.log("Algo falló al cargar a los animalitos");
         }
     }
 
@@ -35,13 +35,20 @@ function Carousel() {
     };
 
     const renderedCards = mascotas.slice(activeIndex, activeIndex + 3).map((m) => (
-        <Card key={m.id} title={m.nombre} text={m.especificaciones} imageUrl="url_de_imagen_gato_1" />
+        <Card 
+            key={m.id} 
+            title={m.nombre} 
+            age={m.edad} 
+            size={m.tamano} 
+            weight={m.peso} 
+            imageUrl="url_de_imagen_gato_1" 
+        />
     ));
 
     return (
         <div className="container">
             <div className="carousel container">
-                <div class="titulocarrusel">
+                <div className="titulocarrusel">
                     <h3>Mascotas en adopción</h3>
                 </div>
                 <button onClick={prevSlide} disabled={activeIndex === 0} className="carousel__anterior">
