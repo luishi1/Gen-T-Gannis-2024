@@ -15,36 +15,37 @@ const AltaMascotas = () => {
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, type, files } = e.target;
+        
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value,
+            [name]: type === 'file' ? files[0] : value
         }));
     };
+    
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); 
-
+        e.preventDefault();
+    
+        const formDataObj = new FormData();
+        formDataObj.append('nombre', formData.nombre);
+        formDataObj.append('edad', formData.edad);
+        formDataObj.append('tamano', formData.tamano);
+        formDataObj.append('peso', formData.peso);
+        formDataObj.append('nivel_de_actividad', formData.nivel_de_actividad);
+        formDataObj.append('especificaciones', formData.especificaciones);
+        formDataObj.append('img', formData.img); 
+    
         try {
             const response = await fetch('http://localhost:8081/api/mascotas', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
+                body: formDataObj,
             });
-
+    
             if (response.ok) {
                 const result = await response.json();
-                alert(result.message); 
-                setFormData({
-                    nombre: '',
-                    edad: '',
-                    tamano: '',
-                    peso: '',
-                    nivel_de_actividad: '',
-                    especificaciones: '',
-                });
+                alert(result.message);
+                setFormData({ nombre: '', edad: '', tamano: '', peso: '', nivel_de_actividad: '', especificaciones: '', img: null });
             }
         } catch (error) {
             console.error('Error en la solicitud:', error);
