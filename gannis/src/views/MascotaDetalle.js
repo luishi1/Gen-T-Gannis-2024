@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import '../ui/MascotaDetalle.css';
 
 const MascotaDetalle = () => {
-    
   const mascotas = [
     {
       id: 1,
@@ -23,7 +22,7 @@ const MascotaDetalle = () => {
       requisitos: 'Amor y un hogar acogedor.',
     },
   ];
-  
+
   const rutas = [
     'principal.jpg',
     'recortada-1.jpg',
@@ -36,27 +35,21 @@ const MascotaDetalle = () => {
       {mascotas.map((mascota, index) => {
         const isGato = mascota.animal === "Gato";
         const isPerro = mascota.animal === "Perro";
-        
+
         return (
           <div key={index}>
-            
             <div className="top">
               <p className="drh2">{mascota.nombre}</p>
-              
             </div>
 
-            {rutas && (
-              <div className={rutas.length >= 4 ? "carousel" : "imgsdm"}>
-                {rutas.map((ruta, i) => {
-                  const imgSrc = i === 0 ? "principal.jpg" : `recortada-${i + 1}.jpg`;
-                  return (
-                    <a key={i} className="aimg" data-bs-toggle="modal" data-bs-target={`#modalimg${i + 1}`}>
-                      <img className={rutas.length >= 4 ? "imgscar" : "imgscar2"} src={`img/mascotas/${mascota.id}/${imgSrc}`} height={rutas.length >= 4 ? undefined : '400px'} />
-                    </a>
-                  );
-                })}
-              </div>
-            )}
+            {/* Nueva sección de imágenes */}
+            <div className="row">
+              {rutas.slice(0, 3).map((ruta, idx) => (
+                <div className="col" key={idx}>
+                  <img src="errorImg.png" className="img-fluid error-img" />
+                </div>
+              ))}
+            </div>
 
             <div className="row align-items-center">
               <div className="col col-dm">
@@ -97,10 +90,10 @@ const MascotaDetalle = () => {
                 <p>{mascota.requisitos}</p>
               </div>
             </div>
+
           </div>
         );
       })}
-
     </div>
   );
 };
