@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons';
 import '../ui/Forms.css';
@@ -8,9 +9,47 @@ import Breadcrumbs from '../components/BreadCrumbs';
 const Login = () => {
     const navigate = useNavigate();
 
+    const [formData, setFormData] = useState({
+        nombre: '',
+        edad: '',
+        tamano: '',
+        peso: '',
+        nivel_de_actividad: '',
+        especificaciones: '',
+    });
+
     const handleRegister = (event) => {
         event.preventDefault(); // Evita que el enlace recargue la página
         navigate('/register'); 
+    };
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch('http://localhost:8081/api/usuarios', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                alert(result.message); 
+                setFormData({
+                    nombre: '',
+                    edad: '',
+                    tamano: '',
+                    peso: '',
+                    nivel_de_actividad: '',
+                    especificaciones: '',
+                });
+            }
+        } catch (error) {
+            console.error('Error en la solicitud:', error);
+        }
     };
 
     return (

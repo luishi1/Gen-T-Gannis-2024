@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2024 a las 11:42:21
+-- Tiempo de generación: 31-10-2024 a las 12:02:48
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -72,7 +72,6 @@ INSERT INTO `mascotas` (`id`, `nombre`, `edad`, `tamano`, `peso`, `nivel_de_acti
 
 CREATE TABLE `usuarios` (
   `id` int(10) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
   `contrasena` varchar(72) NOT NULL,
   `mail` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -81,17 +80,17 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `contrasena`, `mail`) VALUES
-(1, 'Juan Pérez', 'contraseña123', 'juan.perez@example.com'),
-(2, 'María Gómez', 'segura456', 'maria.gomez@example.com'),
-(3, 'Carlos López', 'miContraseña789', 'carlos.lopez@example.com'),
-(4, 'Ana Martínez', '1234abc', 'ana.martinez@example.com'),
-(5, 'Luis Rodríguez', 'pass5678', 'luis.rodriguez@example.com'),
-(6, 'Laura Fernández', 'password2023', 'laura.fernandez@example.com'),
-(7, 'Javier Sánchez', 'javier1234', 'javier.sanchez@example.com'),
-(8, 'Sofía Torres', 's0f1aP@ss', 'sofia.torres@example.com'),
-(9, 'Diego Ramírez', 'd1eg0R@me', 'diego.ramirez@example.com'),
-(10, 'Valentina Castro', 'valen2023', 'valentina.castro@example.com');
+INSERT INTO `usuarios` (`id`, `contrasena`, `mail`) VALUES
+(1, 'contraseña123', 'juan.perez@example.com'),
+(2, 'segura456', 'maria.gomez@example.com'),
+(3, 'miContraseña789', 'carlos.lopez@example.com'),
+(4, '1234abc', 'ana.martinez@example.com'),
+(5, 'pass5678', 'luis.rodriguez@example.com'),
+(6, 'password2023', 'laura.fernandez@example.com'),
+(7, 'javier1234', 'javier.sanchez@example.com'),
+(8, 's0f1aP@ss', 'sofia.torres@example.com'),
+(9, 'd1eg0R@me', 'diego.ramirez@example.com'),
+(10, 'valen2023', 'valentina.castro@example.com');
 
 --
 -- Índices para tablas volcadas
