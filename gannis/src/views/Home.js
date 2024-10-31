@@ -73,16 +73,8 @@ const Home = () => {
             <div className="text-center mt-4">
                 <h1>Bienvenidos a Gannis</h1>
                 <p>Esta es la página de inicio.</p>
-                <div className="input-group mb-3">
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        placeholder="Buscar mascota por nombre"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    <button className="btn btn-outline-secondary" type="button">Buscar</button>
-                </div>
+
+
                 <div className="d-flex justify-content-center flex-wrap">
                     <Carousel />
                 </div>
