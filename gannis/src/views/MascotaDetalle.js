@@ -31,7 +31,7 @@ const MascotaDetalle = () => {
   ];
 
   return (
-    <div className="container">
+    <div className="container mascotasd">
       {mascotas.map((mascota, index) => {
         const isGato = mascota.animal === "Gato";
         const isPerro = mascota.animal === "Perro";
