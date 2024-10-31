@@ -1,6 +1,6 @@
 // src/views/Home.js
 import React, { useEffect, useState } from 'react';
-import Card from '../components/Card/Card';
+import Carousel from '../components/Carousel/Carousel';
 import Breadcrumbs from '../components/BreadCrumbs';
 import '../ui/Home.css'
 
@@ -70,10 +70,7 @@ const Home = () => {
                 <h1>Bienvenidos a Gannis</h1>
                 <p>Esta es la página de inicio.</p>
                 <div className="d-flex justify-content-center flex-wrap">
-                    {
-                        mascotas.map((m) => (
-                            <Card key={m.id} title={m.nombre} text={m.especificaciones} imageUrl="url_de_imagen_gato_1" />
-                        ))}
+                    <Carousel />
                 </div>
             </div>
         </div>
