@@ -1,8 +1,24 @@
 // src/views/Home.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '../components/Card/Card';
 
 const Home = () => {
+
+    const [mascosas, setMascotas] = useState([]);
+
+    const fetchMascotas = async () => {
+        try {
+            const response = await fetch('http://localhost:3001/api/mascotas');
+            if (!response.ok) {
+                throw new Error('No se puede obtener los datos del server')
+            }
+            const data = await response.json()
+            setMascotas(data);
+        } catch (error) {
+            console.log("Algo fallo al cargar a los animalitos");
+        }
+    }
+
     return (
         <div className="text-center">
             <h1>Bienvenidos a Gannis</h1>
