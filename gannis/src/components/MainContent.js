@@ -9,6 +9,9 @@ import Forms from '../views/AltaMascotas';
 import Cats from '../views/Cats'; 
 import Dogs from '../views/Dogs'; 
 import Pets from '../views/Pets'; 
+import Register from '../views/Register'
+import Forms from '../views/AltaMascotas'
+import MascotaDetalle from '../views/MascotaDetalle'
 
 const MainContent = () => {
     return (
@@ -22,6 +25,7 @@ const MainContent = () => {
                 <Route path="/Cats" element={<Cats />} /> 
                 <Route path="/Dogs" element={<Dogs />} /> 
                 <Route path="/Pets" element={<Pets />} /> 
+                <Route path="/mascotadetalle" element={<MascotaDetalle />} />
             </Routes>
         </main>
     );
