@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 app.use(cors());
@@ -43,6 +44,50 @@ db.connect((err) => {
 // Endpoint de prueba
 app.get('/', (req, res) => {
     return res.json("Servidor funcionando");
+});
+
+app.post('/api/login', (req, res) => {
+    const { mail, password } = req.body;
+    db.query('SELECT * FROM usuarios WHERE mail = ?', [mail], (err, results) => {
+        if (err) throw err;
+        if (results.length > 0 && results[0].contrasena == password) {
+            const user = results[0];
+            //console.log(user);
+            const token = jwt.sign({ id: user.id }, 'your_jwt_secret', { expiresIn: '1h' });
+            return res.json({ auth: true, token, email: user.mail});
+        }
+        res.status(401).json({ auth: false, message: 'Credenciales invalidas' });
+    });
+});
+
+app.post('/api/register', (req, res) => {
+    const { mail, password } = req.body;
+
+    // Check if the user already exists
+    const checkUser = "SELECT * FROM usuarios WHERE mail = ?";
+    db.query(checkUser, [mail], async (err, results) => {
+        if (err) return res.status(500).json({ error: 'Error comprobando usuario' });
+        if (results.length > 0) return res.status(400).json({ error: 'El email ya se encuentra registrado' });
+
+        const sqlInsert = "INSERT INTO usuarios (mail, contrasena) VALUES (?, ?)";
+        const values = [mail, password];
+        //console.log(mail, password)
+
+        db.query(sqlInsert, values, (err, result) => {
+            if (err) return res.status(500).json({ error: 'Error al insertar usuario' });
+            
+            const getUser = "SELECT * FROM usuarios WHERE mail = ?";
+            
+            db.query(getUser, [mail], async (err, response) => {
+                if (err) return res.status(500).json({ error: 'Error al recuperar usuario'});
+
+                const user = response[0];
+                console.log("user.mail: " + user.mail);
+                const token = jwt.sign({ id: user.id }, 'your_jwt_secret', { expiresIn: '1h' });
+                return res.status(201).json({ message: 'Usuario registrado con exito', token, email: user.mail });
+            });     
+        });
+    });
 });
 
 // Obtener mascotas
