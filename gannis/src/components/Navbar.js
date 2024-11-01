@@ -1,12 +1,25 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import DarkModeToggle from './DarkModeToggle';
 import './Navbar.css';
 import Breadcrumbs from './BreadCrumbs';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../redux/actions/userActions';
 
 const Navbar = ({ darkMode, toggleDarkMode, view }) => {
     const location = useLocation(); // Obtén la ubicación actual
     console.log("location: " + location.pathname);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const token = useSelector(state => state.users.token);
+    const isLoggedIn = !!token; //chequeo si la sesion esta iniciada
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        dispatch(logout());
+        navigate('/');
+    };
 
     return (
         <><nav className={`navbar navbar-expand-lg ${darkMode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'}`}>
@@ -42,11 +55,17 @@ const Navbar = ({ darkMode, toggleDarkMode, view }) => {
                     </ul>
                 </div>
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <Link className="btn btn-primary me-md-2" to="/login">Iniciar sesión</Link>
-                        <Link className="btn btn-primary me-md-2" to="/register">Registrarse</Link>
-                        <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-                    </div>
+                    {isLoggedIn ? (
+                        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <Link className="btn btn-primary me-md-2" onClick={handleLogout}>Cerrar sesion</Link>
+                        </div>
+                    ) : (
+                        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <Link className="btn btn-primary me-md-2" to="/login">Iniciar sesión</Link>
+                            <Link className="btn btn-primary me-md-2" to="/register">Registrarse</Link>
+                        </div>
+                    )}      
+                    <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
                 </div>
             </div>
         </nav>

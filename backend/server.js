@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 app.use(cors());
@@ -44,6 +45,20 @@ db.connect((err) => {
 // Endpoint de prueba
 app.get('/', (req, res) => {
     return res.json("Servidor funcionando");
+});
+
+app.post('/api/login', (req, res) => {
+    const { mail, password } = req.body;
+    db.query('SELECT * FROM usuarios WHERE mail = ?', [mail], (err, results) => {
+        if (err) throw err;
+        if (results.length > 0 && results[0].contrasena == password) {
+            const user = results[0];
+            //console.log(user);
+            const token = jwt.sign({ id: user.id }, 'your_jwt_secret', { expiresIn: '1h' });
+            return res.json({ auth: true, token, email: user.mail});
+        }
+        res.status(401).json({ auth: false, message: 'Credenciales invalidas' });
+    });
 });
 
 // Obtener mascotas
