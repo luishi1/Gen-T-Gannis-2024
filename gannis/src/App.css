@@ -38,3 +38,14 @@
     transform: rotate(360deg);
   }
 }
+
+.app {
+  background-color: white; /* Color de fondo para modo claro */
+  color: black; /* Color de texto para modo claro */
+}
+
+.dark-mode {
+  background-color: #121212; /* Color de fondo para modo oscuro */
+  color: white; /* Color de texto para modo oscuro */
+}
+
