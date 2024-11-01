@@ -34,7 +34,42 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.app {
+  background-color: white;
+}
+
+.dark-mode,
+.dark-mode .nav-link,
+.dark-mode .card-min,
+.dark-mode .form-control,
+.dark-mode .form-select,
+.dark-mode .table-bordered thead th,
+.dark-mode .table-bordered tbody td,
+.dark-mode .form-control::placeholder{
+  background-color: rgb(33, 37, 41);
+  color: white;
+}
+
+.dark-mode .container-ini form,
+.dark-mode .container-ini .in-se{
+  background-color: rgb(24, 27, 30);
+  color: white;
+
+}
+.dark-mode .btn-secondary{
+  background-color: rgb(33, 37, 41);
+}
+
+.dark-mode .btn-secondary:hover{
+  background-color: #ff9100;
+}
+
+.dark-mode .navbc {
+  border-bottom: 2px solid white;
 }

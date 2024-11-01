@@ -1,5 +1,3 @@
-// src/redux/reducers/mascotaReducer.js
-
 const initialState = {
     loading: false,
     mascotas: [],

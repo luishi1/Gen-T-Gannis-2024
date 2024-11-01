@@ -1,4 +1,3 @@
-// src/redux/actions/mascotaActions.js
 import axios from 'axios';
 
 export const fetchMascotas = () => {
@@ -26,13 +25,18 @@ export const deleteMascota = (id) => {
     };
 };
 
-export const updateMascota = (mascota) => {
+export const updateMascota = (formData) => {
     return async (dispatch) => {
         try {
-            const response = await axios.put(`http://localhost:8081/api/mascotas/${mascota.id}`, mascota);
+            const response = await axios.put(`http://localhost:8081/api/mascotas/${formData.get('id')}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
             dispatch({ type: 'UPDATE_MASCOTA_SUCCESS', payload: response.data });
         } catch (error) {
             console.error('Error updating mascota:', error);
+            throw error; // Lanza el error para que el componente lo maneje
         }
     };
 };

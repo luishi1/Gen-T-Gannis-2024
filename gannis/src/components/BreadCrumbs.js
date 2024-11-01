@@ -7,7 +7,7 @@ const Breadcrumbs = () => {
 
     return (
 
-        <nav className="container">
+        <nav className="container navbc">
             <ol className="breadcrumb">
                 <li>
                     <Link to="/">

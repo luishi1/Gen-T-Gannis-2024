@@ -1,4 +1,3 @@
-// src/index.js
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
@@ -133,6 +132,41 @@ app.delete('/api/mascotas/:id', (req, res) => {
             }
             return res.status(204).send(); // Éxito, sin contenido
         });
+    });
+});
+
+// Endpoint para actualizar una mascota
+app.put('/api/mascotas/:id', upload.single('img'), (req, res) => {
+    const id = req.params.id;
+    const { nombre, edad, tamano, peso } = req.body;
+    let sqlUpdate = "UPDATE mascotas SET nombre = ?, edad = ?, tamano = ?, peso = ? WHERE id = ?";
+    const values = [nombre, edad, tamano, peso, id];
+
+    db.query(sqlUpdate, values, (err) => {
+        if (err) {
+            console.error('Error al actualizar la mascota:', err);
+            return res.status(500).json({ error: 'Error al actualizar la mascota' });
+        }
+
+        // Si hay una nueva imagen, actualiza también la imagen
+        if (req.file) {
+            const extension = path.extname(req.file.originalname);
+            const nuevoNombre = `${id}${extension}`;
+            const oldPath = path.join(__dirname, req.file.path);
+            const newPath = path.join(__dirname, 'uploads', nuevoNombre);
+
+            fs.rename(oldPath, newPath, (err) => {
+                if (err) return res.status(500).json({ error: 'Error al mover la imagen' });
+
+                const sqlImgUpdate = "UPDATE mascotas SET image = ? WHERE id = ?";
+                db.query(sqlImgUpdate, [nuevoNombre, id], (err) => {
+                    if (err) return res.status(500).json({ error: 'Error al actualizar la imagen' });
+                    return res.status(200).json({ message: 'Mascota actualizada con éxito' });
+                });
+            });
+        } else {
+            return res.status(200).json({ message: 'Mascota actualizada con éxito sin nueva imagen' });
+        }
     });
 });
 

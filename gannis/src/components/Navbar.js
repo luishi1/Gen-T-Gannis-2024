@@ -43,12 +43,12 @@ const Navbar = ({ darkMode, toggleDarkMode, view }) => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link ${location.pathname === '/forms' ? 'nav-link-active' : ''}`} to="/mascotas">
+                            <Link className={`nav-link ${location.pathname === '/mascotas' ? 'nav-link-active' : ''}`} to="/mascotas">
                                 <i className="fa-solid fa-circle-info"></i> Mascotas
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className={`nav-link ${location.pathname === '/forms' ? 'nav-link-active' : ''}`} to="/dashboard-admin">
+                            <Link className={`nav-link ${location.pathname === '/dashboard-admin' ? 'nav-link-active' : ''}`} to="/dashboard-admin">
                                 <i className="fa-solid fa-circle-info"></i> DashboardAdmin
                             </Link>
                         </li>
