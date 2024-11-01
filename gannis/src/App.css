@@ -34,18 +34,27 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
 .app {
-  background-color: white; /* Color de fondo para modo claro */
-  color: black; /* Color de texto para modo claro */
+  background-color: white;
 }
 
-.dark-mode {
-  background-color: #121212; /* Color de fondo para modo oscuro */
-  color: white; /* Color de texto para modo oscuro */
+.dark-mode,
+.dark-mode .nav-link,
+.dark-mode .card-min,
+.dark-mode .form-control,
+.dark-mode .form-select,
+.dark-mode .table-bordered thead th,
+.dark-mode .table-bordered tbody td{
+  background-color: rgb(33, 37, 41);
+  color: white;
 }
 
+.dark-mode .navbc {
+  border-bottom: 2px solid white;
+}
