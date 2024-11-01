@@ -60,8 +60,8 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-app.post('/api/users', (req, res) => {
-    const { mail, contrasena } = req.body;
+app.post('/api/register', (req, res) => {
+    const { mail, password } = req.body;
 
     // Check if the user already exists
     const checkUser = "SELECT * FROM usuarios WHERE mail = ?";
@@ -70,13 +70,22 @@ app.post('/api/users', (req, res) => {
         if (results.length > 0) return res.status(400).json({ error: 'El email ya se encuentra registrado' });
 
         const sqlInsert = "INSERT INTO usuarios (mail, contrasena) VALUES (?, ?)";
-        const values = [mail, contrasena];
+        const values = [mail, password];
+        //console.log(mail, password)
 
         db.query(sqlInsert, values, (err, result) => {
-            if (err) return res.status(500).json({ error: 'Error inserting user' });
+            if (err) return res.status(500).json({ error: 'Error al insertar usuario' });
+            
+            const getUser = "SELECT * FROM usuarios WHERE mail = ?";
+            
+            db.query(getUser, [mail], async (err, response) => {
+                if (err) return res.status(500).json({ error: 'Error al recuperar usuario'});
 
-            const usuarioId = result.insertId;
-            return res.status(201).json({ message: 'User  registered successfully', usuarioId }); // Send success response
+                const user = response[0];
+                console.log("user.mail: " + user.mail);
+                const token = jwt.sign({ id: user.id }, 'your_jwt_secret', { expiresIn: '1h' });
+                return res.status(201).json({ message: 'Usuario registrado con exito', token, email: user.mail });
+            });     
         });
     });
 });

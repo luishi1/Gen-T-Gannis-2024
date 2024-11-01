@@ -13,9 +13,9 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
     const token = useSelector(state => state.users.token);
     const isLoggedIn = !!token;
 
-    const handleLogout = (e) => {
+    const handleLogout = async (e) => {
         e.preventDefault();
-        dispatch(logout());
+        await dispatch(logout());
         navigate('/');
     };
 
