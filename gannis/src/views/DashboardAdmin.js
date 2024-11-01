@@ -20,7 +20,7 @@ const DashboardAdmin = () => {
     };
 
     const handleEdit = (mascota) => {
-        navigate('/editar-mascota', { state: { mascota } });
+        navigate(`/editar-mascota/${mascota.id}`, { state: { mascota } });
     };
 
     if (loading) return <p>Cargando...</p>;
