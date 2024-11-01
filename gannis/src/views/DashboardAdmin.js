@@ -1,7 +1,7 @@
 // src/components/DashboardAdmin.js
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchMascotas, deleteMascota } from '../redux/actions/mascotaActions'; 
+import { fetchMascotas, deleteMascota } from '../redux/actions/mascotaActions';
 import { useNavigate } from 'react-router-dom';
 
 const DashboardAdmin = () => {
@@ -37,7 +37,8 @@ const DashboardAdmin = () => {
                         <th>Edad</th>
                         <th>Tamaño</th>
                         <th>Peso</th>
-                        <th>Acciones</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,7 +50,9 @@ const DashboardAdmin = () => {
                             <td>{mascota.tamano}</td>
                             <td>{mascota.peso}</td>
                             <td>
-                                <button className="btn btn-warning mr-2" onClick={() => handleEdit(mascota)}>Editar</button>
+                                <button type="button" class="btn btn-success" onClick={() => handleEdit(mascota)}>Editar</button>
+                            </td>
+                            <td>
                                 <button className="btn btn-danger" onClick={() => handleDelete(mascota.id)}>Eliminar</button>
                             </td>
                         </tr>

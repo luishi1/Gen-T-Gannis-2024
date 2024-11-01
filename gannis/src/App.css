@@ -55,6 +55,20 @@
   color: white;
 }
 
+.dark-mode .container-ini form,
+.dark-mode .container-ini .in-se{
+  background-color: rgb(24, 27, 30);
+  color: white;
+
+}
+.dark-mode .btn-secondary{
+  background-color: rgb(33, 37, 41);
+}
+
+.dark-mode .btn-secondary:hover{
+  background-color: #ff9100;
+}
+
 .dark-mode .navbc {
   border-bottom: 2px solid white;
 }
