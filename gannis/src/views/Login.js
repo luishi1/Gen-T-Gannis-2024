@@ -21,9 +21,8 @@ const Login = () => {
             console.log("loginError: " + loginError);
             navigate('/');
         } catch(error){
-            
+
         }
-        
     };
 
     const handleRegister = (event) => {

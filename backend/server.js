@@ -60,6 +60,18 @@ app.post('/api/login', (req, res) => {
     });
 });
 
+app.post('/api/users', (req, res) => {
+    const { mail, contrasena } = req.body;
+    const sqlInsert = "INSERT INTO usuarios (mail, contrasena) VALUES (?, ?)";
+    const values = [mail, contrasena];
+
+    db.query(sqlInsert, values, (err, result) => {
+        if (err) return res.status(500).json({ error: 'Error al insertar el usuario' });
+
+        const usuarioId = result.insertId;
+    });
+});
+
 // Obtener mascotas
 app.get('/api/mascotas', (req, res) => {
     const sql = "SELECT * FROM mascotas";
