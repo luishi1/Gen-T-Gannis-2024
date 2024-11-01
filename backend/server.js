@@ -62,13 +62,22 @@ app.post('/api/login', (req, res) => {
 
 app.post('/api/users', (req, res) => {
     const { mail, contrasena } = req.body;
-    const sqlInsert = "INSERT INTO usuarios (mail, contrasena) VALUES (?, ?)";
-    const values = [mail, contrasena];
 
-    db.query(sqlInsert, values, (err, result) => {
-        if (err) return res.status(500).json({ error: 'Error al insertar el usuario' });
+    // Check if the user already exists
+    const checkUser = "SELECT * FROM usuarios WHERE mail = ?";
+    db.query(checkUser, [mail], async (err, results) => {
+        if (err) return res.status(500).json({ error: 'Error comprobando usuario' });
+        if (results.length > 0) return res.status(400).json({ error: 'El email ya se encuentra registrado' });
 
-        const usuarioId = result.insertId;
+        const sqlInsert = "INSERT INTO usuarios (mail, contrasena) VALUES (?, ?)";
+        const values = [mail, contrasena];
+
+        db.query(sqlInsert, values, (err, result) => {
+            if (err) return res.status(500).json({ error: 'Error inserting user' });
+
+            const usuarioId = result.insertId;
+            return res.status(201).json({ message: 'User  registered successfully', usuarioId }); // Send success response
+        });
     });
 });
 

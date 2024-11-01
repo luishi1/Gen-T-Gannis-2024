@@ -1,10 +1,12 @@
 import axios from 'axios';
 
+export const CREATE_SUCCESS = 'CREATE_SUCCESS';
+export const CREATE_FAILURE = 'CREATE_FAILURE';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT = 'LOGOUT';
 
-export const fetchUsers = () => {
+/* export const fetchUsers = () => {
     return async (dispatch) => {
         dispatch({ type: 'FETCH_MASCOTAS_REQUEST' });
         try {
@@ -14,7 +16,7 @@ export const fetchUsers = () => {
             dispatch({ type: 'FETCH_MASCOTAS_FAILURE', payload: error.message });
         }
     };
-};
+}; */
 
 export const login = (mail, password) => {
     return async (dispatch) => {
@@ -35,3 +37,7 @@ export const logout = () => {
         dispatch({ type: LOGOUT });
     };
 };
+
+export const createUser = () => {
+    
+}
