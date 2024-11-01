@@ -12,7 +12,7 @@ const Mascotas = () => {
         try {
             const response = await fetch('http://localhost:8081/api/mascotas');
             if (!response.ok) {
-                throw new Error('No se puede obtener los datos del server');
+                throw new Error('No se puede obtener los datos del servidor');
             }
             const data = await response.json();
             setMascotas(data);
@@ -27,9 +27,9 @@ const Mascotas = () => {
 
     const filteredMascotas = mascotas.filter(mascota => {
         const matchesName = mascota.nombre.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesAge = ageFilter ? mascota.edad === parseInt(ageFilter) : true;
-        const matchesSize = sizeFilter ? mascota.tamano.toLowerCase().includes(sizeFilter.toLowerCase()) : true; // Coincidencia parcial
-        const matchesWeight = weightFilter ? String(mascota.peso).includes(weightFilter) : true; // Coincidencia parcial
+        const matchesAge = ageFilter ? mascota.edad === ageFilter : true; // Cambiado para comparar correctamente
+        const matchesSize = sizeFilter ? mascota.tamano.toLowerCase().includes(sizeFilter.toLowerCase()) : true;
+        const matchesWeight = weightFilter ? String(mascota.peso).includes(weightFilter) : true;
 
         return matchesName && matchesAge && matchesSize && matchesWeight;
     });
@@ -45,13 +45,18 @@ const Mascotas = () => {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <input
-                    type="number"
+                <select
                     className="form-control mb-2"
-                    placeholder="Edad"
                     value={ageFilter}
                     onChange={(e) => setAgeFilter(e.target.value)}
-                />
+                >
+                    <option value="">Seleccionar edad</option>
+                    {['1 semana', '2 semanas', '3 semanas', '1 mes', '2 meses', '3 meses', '4 meses', '5 meses', '6 meses', '7 meses', '8 meses', '9 meses', '10 meses', '11 meses', '1 año', '2 años', '3 años', '4 años', '5 años', '6 años', '7 años', '8 años', '9 años', '10 años', '11 años', '12 años', '13 años', '14 años', '15 años', '16 años', '17 años', '18 años', '19 años', '20 años'].map((edad) => (
+                        <option key={edad} value={edad}>
+                            {edad}
+                        </option>
+                    ))}
+                </select>
                 <select
                     className="form-control mb-2"
                     value={sizeFilter}
@@ -63,7 +68,7 @@ const Mascotas = () => {
                     <option value="grande">Grande</option>
                 </select>
                 <input
-                    type="text" // Cambiado a texto para permitir coincidencias parciales
+                    type="text"
                     className="form-control mb-2"
                     placeholder="Peso"
                     value={weightFilter}
