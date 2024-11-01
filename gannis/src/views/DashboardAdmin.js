@@ -50,7 +50,7 @@ const DashboardAdmin = () => {
                             <td>{mascota.tamano}</td>
                             <td>{mascota.peso}</td>
                             <td>
-                                <button type="button" class="btn btn-success" onClick={() => handleEdit(mascota)}>Editar</button>
+                                <button type="button" className="btn btn-success" onClick={() => handleEdit(mascota)}>Editar</button>
                             </td>
                             <td>
                                 <button className="btn btn-danger" onClick={() => handleDelete(mascota.id)}>Eliminar</button>
