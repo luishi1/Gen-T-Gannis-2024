@@ -50,7 +50,8 @@
 .dark-mode .form-control,
 .dark-mode .form-select,
 .dark-mode .table-bordered thead th,
-.dark-mode .table-bordered tbody td{
+.dark-mode .table-bordered tbody td,
+.dark-mode .form-control::placeholder{
   background-color: rgb(33, 37, 41);
   color: white;
 }
